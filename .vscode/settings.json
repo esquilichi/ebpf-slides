@@ -1,0 +1,7 @@
+
+{
+    "markdown.marp.themes": [
+        "themes/darcula.css",
+        "https://raw.githubusercontent.com/rnd195/marp-community-themes/live/themes/rose-pine.css"
+    ]
+}
