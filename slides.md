@@ -18,6 +18,9 @@ style: |
       display: block;
       margin: 0 auto;
     }
+    section.lead h1 {
+        text-align: center;
+    }
 
 ---
 
@@ -798,4 +801,10 @@ Tenéis el código boilerplate para acabar la idea planteada en las diapositivas
 [Bad Bpf](https://github.com/pathtofile/bad-bpf)
 [Offensive Bpf - bpf_probe_write_user](https://embracethered.com/blog/posts/2021/offensive-bpf-libbpf-bpf_probe_write_user/)
 
+
+---
+
+<!-- _class: lead -->
+
+# ¡Muchas gracias!
 
