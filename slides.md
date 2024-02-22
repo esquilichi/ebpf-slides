@@ -21,6 +21,9 @@ style: |
     section.lead h1 {
         text-align: center;
     }
+    section.lead h2 {
+        text-align: center;
+    }
 
 ---
 
@@ -36,8 +39,8 @@ Ismael Gómez Esquilichi
 
 - Aspirante a desarrollador de algo que funcione a la primera alguna vez
 - Se me complica programar sin IDE
-- Instalo GEF y PWNGDB para utilizar `b *main` únicamente
-- Integrante de ["**base64**", "**IoTak0s**", "**Jinchomaniacos**"]
+- Instalo GEF y PWNGDB para utilizar `b *main` y `r` únicamente
+- Integrante de ["**base64**", "**IoTak0s**", "**Jinchomaniacos**" , "**John Keys**"]
 - Personal de investigación en GRAFO
 - Interesado en web hacking y low level stuff
 - ~~Miembro de OT 2023-24~~
@@ -45,15 +48,27 @@ Ismael Gómez Esquilichi
 
 ---
 
+# Foto
+
+![w:500 center](assets/omar.jpg)
+
+---
+
+# Git Clone
+
+## https://github.com/esquilichi/ebpf-public
+
+---
+
 
 # BPF (classic): Orígenes
 
-Berkeley Packet Filter fue desarrollado en 1992 para filtrar paquetes de red
+**Berkeley Packet Filter** fue desarrollado en 1992 para **filtrar paquetes de red**
 
 Muchos usuarios han interactuado con BPF usando ["Wireshark", "tcpdump", "winpcap"]
 
-Al usar tcpdump con un filtro como "“dst host 10.10.10.10 and (tcp port 80 or tcp
-port 443)" automáticamente compila a un filtro de BPF muy optimizado
+Al usar **tcpdump** con un filtro como "“dst host 10.10.10.10 and (tcp port 80 or tcp
+port 443)" automáticamente **compila a un filtro de BPF muy optimizado**
 
 ---
 
@@ -657,7 +672,7 @@ rb = ring_buffer__new(bpf_map__fd(skel->maps.rb), handle_event, NULL, NULL);
 1. Crear función `handle_execve()` con el tracepoint correcto
 `SEC("tp/syscalls/sys_enter_execve") int handle_execve_enter(...)`
 2. Leer el programa original y guardarlo en un buffer
-3. Modificar dicho buffer
+3. **Modificar dicho buffer**
 4. Usar `bpf_probe_write_user()` para modificar el arg[0]
 
 ```c
@@ -681,21 +696,21 @@ rb = ring_buffer__new(bpf_map__fd(skel->maps.rb), handle_event, NULL, NULL);
 
 # `bpf_probe_write_user()`
 
-Este *helper* puede escribir en cualquier dirección de memoria de userland perteneciente al proceso responsable de llamar a la función *hookeada*.
+Este *helper* puede **escribir en cualquier dirección de memoria de userland** perteneciente al proceso responsable de llamar a la función *hookeada*.
 
 Casos de uso:
-1. Modificar cualquiera de los argumentos con los que se llama a una llamada del sistema
-2. Modificar los argumentos de usuario en las funciones del kernel (i.e. `vfs_read`)
+1. **Modificar** cualquiera de los **argumentos** con los que se llama a una **llamada del sistema**
+2. **Modificar** los **argumentos** de **usuario** en las funciones del **kernel** (i.e. `vfs_read`)
 
 ```c
 ssize_t vfs_read(struct file *file , char __user *buf , size_t count, loff_t *pos)
 ```
-3. Modificar la memoria del proceso tomando los parámetros de la función como referencia y escaneando la pila (ROP Malware!)
+3. **Modificar la memoria del proceso** tomando los parámetros de la función como referencia y escaneando la pila (ROP Malware!)
 
 
 ---
 
-# if `ptrace()` then *SIGKILL*
+# Ejercicio: if `ptrace()` then *SIGKILL*
 
 Vamos a realizar un programa que, cuando detecte un proceso que está ejecutando la llamada a sistema `ptrace()` envie una señal de tipo SIGKILL
 
@@ -704,6 +719,13 @@ Requisitos:
 2. *Hookear* la syscall `ptrace`
 3. Enviar la señal (¿habrá algún helper?)
 4. Win!
+
+
+---
+
+# Backdoor
+
+![center w:500](assets/Sudo_logo.png)
 
 
 ---
