@@ -173,19 +173,7 @@ Kprobes es dinámico, lo que significa que los desarrolladores pueden insertar y
 
 ---
 
-# Internals de kprobes
-
-Cuando se **registra una kprobe**, se hace una **copia de la instrucción instrumentada** y **sustituye** el primer byte(s) de la instrucción sondeada por una instrucción de **punto de interrupción** (i.e. int3)
-
-Cuando la CPU **alcanza el breakpoint**, se guardan los registros y el control pasa a Kprobes a través del mecanismo **notifier_call_chain**
-
-Kprobes ejecuta el **pre_handler** **asociado** con la kprobe, pasando al handler las direcciones de la estructura kprobe y los registros guardados
-
-Al ejecutarse en kernel, **pueden cambiar los registros, incluyendo el registro de instrucción**
-
----
-
-# Internals de kprobes
+# kprobe ejemplo
 
 ```c
 static int handler_pre(struct kprobe *p, struct pt_regs *regs) {
